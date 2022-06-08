@@ -67,14 +67,18 @@ const CountdownTimer = ({ targetDate }) => {
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
 
   if (days + hours + minutes + seconds <= 0) {
-   // alert("Times out");
+    return(
+      <div className='timeUp'>
+      Time is up
+      </div>
+    )
   } else {
     return (
       <ShowCounter
-        days={days}
-        hours={hours}
-        minutes={minutes}
-        seconds={seconds}
+        days={days.toString().padStart(2, "0")}
+        hours={hours.toString().padStart(2, "0")}
+        minutes={minutes.toString().padStart(2, "0")}
+        seconds={seconds.toString().padStart(2, "0")}
       />
     );
   }

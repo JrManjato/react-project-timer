@@ -99,3 +99,9 @@ button:hover{
 .container div{
   margin-left: 145px;
 }
+.timeUp{
+  color: #e5ff00;
+  font-size: 100px;
+  text-align: center;
+  font-family: Orbitron, sans-serif;
+}

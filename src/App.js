@@ -2,11 +2,10 @@ import { Component } from 'react';
 import './App.css';
 import { Clock } from './Components/Clock/rfcClock';
 import CountdownTimer from './Components/CountDown/CountdownTimer';
-//import { Button } from "./Components/Incrementer/rfcIncrementer"; 
-let sec = null; 
-let min = null; 
-let hour = null; 
+let sec = 0; let min = 0; let hour = 0; 
+ 
 class App extends Component{
+
   constructor(props){
     super(props)
     this.state = {
@@ -19,20 +18,15 @@ class App extends Component{
     this.handleChangeM = this.handleChangeM.bind(this)
     this.handleChangeH = this.handleChangeH.bind(this)
   }
+
   handleChange(e) {
-    this.setState({
-      sec: e.target.value
-    })
+    this.setState({sec: e.target.value})
   }
   handleChangeM(e) {
-    this.setState({
-      min: e.target.value
-    })
+    this.setState({min: e.target.value})
   }
   handleChangeH(e) {
-    this.setState({
-      hour: e.target.value
-    })
+    this.setState({hour: e.target.value})
   }
   start(){
     this.setState({
@@ -45,9 +39,7 @@ class App extends Component{
      hour = this.state.hour
   }
   restart(){
-    this.setState({
-      sec: this.state.sec
-    })
+    this.setState({sec: this.state.sec})
   }
   toggle(){
     if (this.state.scale === 'c') {
@@ -65,31 +57,30 @@ class App extends Component{
   render(){
     //const {sec} = this.state// équivalent à this.state.sec // Enlever le commentaire si on veut lancer le timer automatiquement 
     const inputVal = (   ((parseFloat(hour))*3600) + ((parseFloat(min))*60) + (parseFloat(sec))  + 2) *1000;
-    console.log(hour);
     const timeNow = new Date().getTime();
     const difference = timeNow + inputVal;
   
     return <div className='All'>
 
     <div className='container'>
-      <div id='texte'>Insert Hours , Minutes and Seconds Here - - - -></div>
+      <div id='texte'>Insert Hours , Minutes and Seconds Here - - - -{'>'}</div>
       <div className='inputs'>
       <input type="text" value={this.state.hour} onChange={this.handleChangeH}/>  
       <input type="text" value={this.state.min} onChange={this.handleChangeM}/>  
       <input type="text" value={this.state.sec} onChange={this.handleChange}/>
       </div>
-    </ div>
+    </div>
        
-      <div>
+    <div>
         {this.state.scale === 'c' ? <Clock/> : <CountdownTimer targetDate={difference} />}
-      </div>
+    </div>
 
-      <div className='boutons'>
+    <div className='boutons'>
         <button onClick={this.start.bind(this)}>Start</button>
         <button onClick={this.restart.bind(this)}>Restart</button>
         <button onClick={this.toggle.bind(this)}>{this.label()}</button>
-      </div>
     </div>
+  </div>
   }
 }
 export default App;
